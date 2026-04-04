@@ -7,9 +7,9 @@ import Header from "@/components/Header";
 import PropertyDetail from "@/components/PropertyDetail";
 import PricingModal from "@/components/PricingModal";
 import type { Property } from "@/lib/supabase";
-import type { ThemeKey } from "@/lib/constants";
+import type { ThemeKey } from "@/lib/constanths";
 
-const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
+const MapView = dynamic(() => import("@/compohnents/MapView"), { ssr: false });
 
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -53,7 +53,7 @@ export default function Home() {
   }, [fetchProperties]);
 
   const counties = [...new Set(properties.map((p) => p.county))].sort();
-  const types = [...new Set(properties.map((p) => p.property_type).filter(Boolean))].sort();
+  const types = [...new Set(properties.map((p) => p.property_type).filter((t): t is string => Boolean(t)))].sort();
   const sources = [...new Set(properties.map((p) => p.source))].sort();
 
   return (
